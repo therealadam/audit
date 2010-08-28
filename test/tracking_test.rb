@@ -29,7 +29,8 @@ class TrackingTest < Test::Unit::TestCase
   end
   
   should "add audit-related methods" do
-    [:audit, :audits].each { |m| assert @model.methods.include?(m) }
+    assert_equal %w{audit audit_bucket audits}, 
+      @model.methods.map { |s| s.to_s }.grep(/audit/).sort
   end
   
 end

@@ -41,10 +41,30 @@ For Cassandra 0.6, add the following to `storage-conf.xml`:
         <ReplicationFactor>1</ReplicationFactor>
         <EndPointSnitch>org.apache.cassandra.locator.EndPointSnitch</EndPointSnitch>
     </Keyspace>
+    
+## Hacking
+
+Set up RVM:
+
+    $ rvm install ree-1.8.7-2010.01
+    $ rvm use ree-1.8.7-2010.01
+    $ rvm gemset create audit
+    $ rvm gemset use audit
+    $ gem install bundler
+    $ bundle install
+    $ rvm install 1.9.2
+    $ rvm use 1.9.2
+    $ rvm gemset create audit
+    $ rvm gemset use audit
+    $ gem install bundler
+    $ bundle install
+    
+Run the test suite with all supported runtimes:
+
+    rvm 1.9.2@audit,ree-1.8.7-2010.01@audit rake test
 
 ## TODO
 
-- Test on 1.8.7
 - API docs
 - Packaging
 - Handle multiple changed attributes
