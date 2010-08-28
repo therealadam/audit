@@ -1,0 +1,2 @@
+require 'bundler'
+Bundler.setup
