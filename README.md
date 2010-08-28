@@ -42,6 +42,13 @@ For Cassandra 0.6, add the following to `storage-conf.xml`:
         <EndPointSnitch>org.apache.cassandra.locator.EndPointSnitch</EndPointSnitch>
     </Keyspace>
 
+## TODO
+
+- Tests
+- Metadata tracking on audit records
+- Packaging
+- API docs
+- Test on 1.8.7
 
 ## License
 

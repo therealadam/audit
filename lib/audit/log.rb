@@ -2,7 +2,6 @@ require 'cassandra'
 require 'active_support/core_ext/module'
 require 'simple_uuid'
 
-#TODO: TomDoc this mofo
 module Audit::Log
   
   mattr_accessor :connection

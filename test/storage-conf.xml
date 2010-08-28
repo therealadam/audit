@@ -1,0 +1,10 @@
+<!-- This isn't a valid config, just enough to get tests passing -->
+<Keyspaces>
+  <Keyspace Name="Audit">
+      <KeysCachedFraction>0.01</KeysCachedFraction>
+      <ColumnFamily CompareWith="UTF8Type" Name="Audits" />
+      <ReplicaPlacementStrategy>org.apache.cassandra.locator.RackUnawareStrategy</ReplicaPlacementStrategy>
+      <ReplicationFactor>1</ReplicationFactor>
+      <EndPointSnitch>org.apache.cassandra.locator.EndPointSnitch</EndPointSnitch>
+  </Keyspace>
+</Keyspaces>
