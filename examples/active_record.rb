@@ -15,19 +15,7 @@ ActiveRecord::Schema.define do
 end
 
 class User < ActiveRecord::Base
-  
-  before_update :audit
-  
-  def audits
-    Audit::Log.audits(:Users, self.id)
-  end
-  
-  protected
-  
-  def audit
-    Audit::Log.record(:Users, self.id, changes)
-  end
-  
+  include Audit::Tracking
 end
 
 if __FILE__ == $PROGRAM_NAME
