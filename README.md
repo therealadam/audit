@@ -13,7 +13,7 @@ Include `Audit::Tracking` into your change-sensitive ActiveRecord models. When y
     >> u = User.create(:name => 'Adam', :city => 'Dallas')
     >> u.update_attributes(:city => 'Austin')
     >> u.audits
-    <Audit::Change @attributes={:city => ['Dallas', 'Austin']}>
+    [#<struct Audit::Changeset changes=[#<struct Audit::Change attribute="username", old="akk", new="therealadam">]>, #<struct Audit::Changeset changes=[#<struct Audit::Change attribute="username", old="adam", new="akk">]>, #<struct Audit::Changeset changes=[#<struct Audit::Change attribute="age", old=30, new=31>]>]
 
 # Compatibility
 
@@ -47,4 +47,4 @@ For Cassandra 0.6, add the following to `storage-conf.xml`:
 
 Copyright 2010 Adam Keys `<adam@therealaadam.com>`
 
-Insert MIT License here.
+Audit is MIT licensed. Enjoy!
