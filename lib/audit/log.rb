@@ -1,21 +1,27 @@
 require 'cassandra'
-require 'active_support/core_ext/class'
+require 'active_support/core_ext/module'
 require 'simple_uuid'
 
 #TODO: TomDoc this mofo
-class Audit::Log
+module Audit::Log
   
-  cattr_accessor :connection
+  mattr_accessor :connection
   
   def self.record(bucket, key, changes)
-    # TODO: Use a timestamp here?
     payload = {SimpleUUID::UUID.new.to_guid => JSON.dump(changes)}
     connection.insert(:Audits, "#{bucket}:#{key}", payload)
   end
   
   def self.audits(bucket, key)
-    payload = connection.get(:Audits, "#{bucket}:#{key}")
-    payload.values.map { |p| JSON.load(p) }
+    payload = connection.get(:Audits, "#{bucket}:#{key}", :reversed => true)
+    payload.values.map do |p|
+      Audit::Changeset.from_hash(JSON.load(p))
+    end
+  end
+  
+  def self.clear!
+    # It'd be nice if this could clear one bucket at a time
+    connection.clear_keyspace!
   end
   
 end
