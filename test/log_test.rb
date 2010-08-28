@@ -10,6 +10,11 @@ class LogTest < Test::Unit::TestCase
     assert Audit::Log.record(:Users, 1, simple_change)
   end
   
+  should "load audit records" do
+    Audit::Log.record(:Users, 1, simple_change)
+    assert_kind_of Audit::Changeset, Audit::Log.audits(:Users, 1).first
+  end
+  
   def simple_change
     {"username" => ["akk", "adam"]}
   end
@@ -17,4 +22,5 @@ class LogTest < Test::Unit::TestCase
   def storage_conf
     File.join(File.dirname(__FILE__), 'storage-conf.xml')
   end
+  
 end

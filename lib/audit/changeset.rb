@@ -1,4 +1,4 @@
-Audit::Change = Struct.new(:attribute, :old, :new)
+Audit::Change = Struct.new(:attribute, :old_value, :new_value)
 
 class Audit::Changeset < Struct.new(:changes)
   

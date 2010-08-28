@@ -44,11 +44,13 @@ For Cassandra 0.6, add the following to `storage-conf.xml`:
 
 ## TODO
 
-- Tests
-- Metadata tracking on audit records
-- Packaging
-- API docs
 - Test on 1.8.7
+- API docs
+- Packaging
+- Handle multiple changed attributes
+- Metadata tracking on audit records
+- Ignore changes on some attributes
+- Generate bucket names for namespaced models
 
 ## License
 
