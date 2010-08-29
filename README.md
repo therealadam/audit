@@ -61,11 +61,10 @@ Set up RVM:
     
 Run the test suite with all supported runtimes:
 
-    rvm 1.9.2@audit,ree-1.8.7-2010.01@audit rake test
+    $ rvm 1.9.2@audit,ree-1.8.7-2010.01@audit rake test
 
 ## TODO
 
-- API docs
 - Packaging
 - Handle multiple changed attributes
 - Metadata tracking on audit records
