@@ -65,7 +65,6 @@ Run the test suite with all supported runtimes:
 
 ## TODO
 
-- Packaging
 - Handle multiple changed attributes
 - Metadata tracking on audit records
 - Ignore changes on some attributes
