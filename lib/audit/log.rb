@@ -31,7 +31,7 @@ module Audit::Log
   def self.audits(bucket, key)
     payload = connection.get(:Audits, "#{bucket}:#{key}", :reversed => true)
     payload.values.map do |p|
-      Audit::Changeset.from_hash(JSON.load(p))
+      Audit::Changeset.from_enumerable(JSON.load(p))
     end
   end
   

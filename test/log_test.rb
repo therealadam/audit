@@ -15,8 +15,22 @@ class LogTest < Test::Unit::TestCase
     assert_kind_of Audit::Changeset, Audit::Log.audits(:Users, 1).first
   end
   
+  should "load audits with multiple changed attributes" do
+    Audit::Log.record(:Users, 1, multiple_changes)
+    changes = Audit::Log.audits(:Users, 1).first.changes
+    changes.each do |change|
+      assert %w{username age}.include?(change.attribute)
+      assert ["akk", 30].include?(change.old_value)
+      assert ["adam", 31].include?(change.new_value)
+    end
+  end
+  
   def simple_change
     {"username" => ["akk", "adam"]}
+  end
+  
+  def multiple_changes
+    {"username" => ["akk", "adam"], "age" => [30, 31]}
   end
   
   def storage_conf

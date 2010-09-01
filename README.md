@@ -65,10 +65,10 @@ Run the test suite with all supported runtimes:
 
 ## TODO
 
-- Handle multiple changed attributes
 - Metadata tracking on audit records
 - Ignore changes on some attributes
 - Generate bucket names for namespaced models
+- Add more AR callbacks (delete, ?)
 
 ## License
 

@@ -25,4 +25,13 @@ class Audit::Changeset < Struct.new(:changes)
     new(changes)
   end
   
+  def self.from_enumerable(enum)
+    case enum
+    when Hash
+      from_hash(enum)
+    when Array
+      enum.map { |hsh| from_hash(hsh) }
+    end
+  end
+  
 end

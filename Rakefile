@@ -40,6 +40,11 @@ Rake::TestTask.new do |t|
   t.test_files = FileList['test/*_test.rb']
 end
 
+desc "Run tests against all supported Ruby versions"
+task :compat do
+  sh "rvm 1.9.2@audit,ree-1.8.7-2010.01@audit rake test"
+end
+
 desc "Generate RCov test coverage and open in your browser"
 task :coverage do
   require 'rcov'

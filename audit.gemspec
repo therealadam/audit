@@ -40,12 +40,12 @@ Gem::Specification.new do |s|
 
   ## List your runtime dependencies here. Runtime dependencies are those
   ## that are needed for an end user to actually USE your code.
-  s.add_dependency('cassandra', [">= 0.8.2"])
+  s.add_dependency('cassandra', ["~> 0.8.2"])
 
   ## List your development dependencies here. Development dependencies are
   ## those that are only needed during development
-  s.add_development_dependency('shoulda', [">= 2.11.3"])
-  s.add_development_dependency('nokogiri', ['1.4.3.1'])
+  s.add_development_dependency('shoulda', ["~> 2.11.3"])
+  s.add_development_dependency('nokogiri', ['~> 1.4.3.1'])
 
   ## Leave this section as-is. It will be automatically generated from the
   ## contents of your Git repository via the gemspec task. DO NOT REMOVE
