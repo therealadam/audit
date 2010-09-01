@@ -17,6 +17,7 @@ class User < ActiveRecord::Base; include Audit::Tracking; end
 class TrackingTest < Test::Unit::TestCase
   
   def setup
+    super
     @model = User.new
   end
   
@@ -28,8 +29,18 @@ class TrackingTest < Test::Unit::TestCase
     
   end
   
+  should "track audit metadata for the next save" do
+    audit_metadata = {"reason" => "Canonize usernames", "changed_by" => "JD"}
+    user = User.create(:username => "adam", :age => 31)
+    user.audit_metadata(audit_metadata)
+    user.update_attributes(:username => "therealadam")
+    changes = user.audits
+    
+    assert_equal audit_metadata, changes.first.metadata
+  end
+  
   should "add audit-related methods" do
-    assert_equal %w{audit audit_bucket audits}, 
+    assert_equal %w{audit audit_bucket audit_metadata audits}, 
       @model.methods.map { |s| s.to_s }.grep(/audit/).sort
   end
   

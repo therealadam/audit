@@ -2,10 +2,6 @@ require 'test_helper'
 
 class LogTest < Test::Unit::TestCase
   
-  def setup
-    Audit::Log.connection = Cassandra::Mock.new('Audit', storage_conf)
-  end
-  
   should "save audit record" do
     assert Audit::Log.record(:Users, 1, simple_change)
   end
@@ -26,15 +22,14 @@ class LogTest < Test::Unit::TestCase
   end
   
   def simple_change
-    {"username" => ["akk", "adam"]}
+    {"changes" => {"username" => ["akk", "adam"]}, "metadata" => {}}
   end
   
   def multiple_changes
-    {"username" => ["akk", "adam"], "age" => [30, 31]}
-  end
-  
-  def storage_conf
-    File.join(File.dirname(__FILE__), 'storage-conf.xml')
+    {
+      "changes" => {"username" => ["akk", "adam"], "age" => [30, 31]}, 
+      "metadata" => {}
+    }
   end
   
 end

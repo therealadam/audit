@@ -24,6 +24,9 @@ if __FILE__ == $PROGRAM_NAME
   user = User.create(:username => 'adam', :age => 30)
   user.update_attributes(:age => 31)
   user.update_attributes(:username => 'akk')
+  
+  user.audit_metadata(:reason => "Canonize usernames")
   user.update_attributes(:username => 'therealadam')
+  
   p user.audits
 end

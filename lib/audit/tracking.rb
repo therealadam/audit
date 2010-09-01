@@ -20,7 +20,9 @@ module Audit::Tracking
   #
   # Returns nothing.
   def audit
-    Audit::Log.record(audit_bucket, self.id, changes)
+    # TODO: handle nil @audit_metadata
+    data = {"changes" => changes, "metadata" => @audit_metadata}
+    Audit::Log.record(audit_bucket, self.id, data)
   end
   
   # Generates the bucket name for the model class.
@@ -28,6 +30,15 @@ module Audit::Tracking
   # Returns a Symbol-ified and pluralized version of the model's name.
   def audit_bucket
     self.class.name.pluralize.to_sym
+  end
+  
+  # Public: Store audit metadata for the next write.
+  #
+  # metadata - a Hash of data that is written alongside the change data
+  #
+  # Returns nothing.
+  def audit_metadata(metadata={})
+    @audit_metadata = @audit_metadata.try(:update, metadata) || metadata
   end
   
 end

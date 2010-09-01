@@ -65,10 +65,9 @@ Run the test suite with all supported runtimes:
 
 ## TODO
 
-- Metadata tracking on audit records
 - Ignore changes on some attributes
-- Generate bucket names for namespaced models
 - Add more AR callbacks (delete, ?)
+- Generate bucket names for namespaced models
 
 ## License
 
