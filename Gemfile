@@ -1,16 +1,14 @@
 source :gemcutter
 
-gem "cassandra", :git => 'http://github.com/fauna/cassandra.git'
-git "git://github.com/rails/rails.git", :tag => "v3.0.0_RC2" do
-  gem "activemodel"
-end
+gem "cassandra", "~> 0.8.2"
+gem "activemodel", "~> 3.0.0"
 
 group :development do
-  gem "activerecord", :git => "git://github.com/rails/rails.git", :tag => "v3.0.0_RC2"
+  gem "activerecord", "~> 3.0.0"
   gem "sqlite3-ruby"
 end
 
 group :test do
-  gem "shoulda"
-  gem "nokogiri" # Cassandra::Mock needs this
+  gem "shoulda", "~> 2.11.3"
+  gem "nokogiri", "~> 1.4.3.1" # Cassandra::Mock needs this
 end
