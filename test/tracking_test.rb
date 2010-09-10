@@ -43,5 +43,16 @@ class TrackingTest < Test::Unit::TestCase
     assert_equal %w{audit audit_bucket audit_metadata audits}, 
       @model.methods.map { |s| s.to_s }.grep(/audit/).sort
   end
+
+  should "set the log object to an arbitrary object" do
+    Audit::Tracking.log = flexmock(:log).
+      should_receive(:audits).
+      once.
+      mock
+
+    User.create(:username => "Adam", :age => "31").audits
+
+    Audit::Tracking.log = Audit::Log
+  end
   
 end

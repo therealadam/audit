@@ -19,6 +19,7 @@ GEM
       rake
       simple_uuid (>= 0.1.0)
       thrift_client (>= 0.4.0)
+    flexmock (0.8.7)
     i18n (0.4.1)
     json (1.4.6)
     nokogiri (1.4.3.1)
@@ -38,6 +39,7 @@ DEPENDENCIES
   activemodel (~> 3.0.0)
   activerecord (~> 3.0.0)
   cassandra (~> 0.8.2)
+  flexmock (~> 0.8.7)
   nokogiri (~> 1.4.3.1)
   shoulda (~> 2.11.3)
   sqlite3-ruby

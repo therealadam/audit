@@ -1,8 +1,16 @@
+require 'active_support/core_ext/module'
+
 # Methods for tracking changes to your models by creating audit records
 # for every atomic change. Including this module adds callbacks which create
 # audit records every time a model object is changed and saved.
 module Audit::Tracking
   extend ActiveSupport::Concern
+
+  # Public: set the log object to track changes with.
+  #
+  # Returns the log object currently in use.
+  mattr_accessor :log
+  self.log = Audit::Log
   
   included do
     before_update :audit
@@ -12,7 +20,7 @@ module Audit::Tracking
   #
   # Returns an Array of Changeset objects.
   def audits
-    Audit::Log.audits(audit_bucket, self.id)
+    Audit::Tracking.log.audits(audit_bucket, self.id)
   end
   
   # Creates a new audit record for this model object using data returned by 
@@ -22,7 +30,7 @@ module Audit::Tracking
   def audit
     # TODO: handle nil @audit_metadata
     data = {"changes" => changes, "metadata" => @audit_metadata}
-    Audit::Log.record(audit_bucket, self.id, data)
+    Audit::Tracking.log.record(audit_bucket, self.id, data)
   end
   
   # Generates the bucket name for the model class.
