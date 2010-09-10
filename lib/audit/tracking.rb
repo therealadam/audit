@@ -28,8 +28,7 @@ module Audit::Tracking
   #
   # Returns nothing.
   def audit
-    # TODO: handle nil @audit_metadata
-    data = {"changes" => changes, "metadata" => @audit_metadata}
+    data = {"changes" => changes, "metadata" => audit_metadata}
     Audit::Tracking.log.record(audit_bucket, self.id, data)
   end
   

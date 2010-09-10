@@ -1,6 +1,7 @@
 require 'cassandra'
 require 'active_support/core_ext/module'
 require 'simple_uuid'
+require 'yajl'
 
 # Methods for manipulating audit data stored in Cassandra.
 module Audit::Log
@@ -17,7 +18,8 @@ module Audit::Log
   #
   # Returns nothing.
   def self.record(bucket, key, changes)
-    payload = {SimpleUUID::UUID.new.to_guid => JSON.dump(changes)}
+    json = Yajl::Encoder.encode(changes)
+    payload = {SimpleUUID::UUID.new.to_guid => json}
     connection.insert(:Audits, "#{bucket}:#{key}", payload)
   end
   
@@ -31,7 +33,7 @@ module Audit::Log
   def self.audits(bucket, key)
     payload = connection.get(:Audits, "#{bucket}:#{key}", :reversed => true)
     payload.values.map do |p|
-      Audit::Changeset.from_enumerable(JSON.load(p))
+      Audit::Changeset.from_enumerable(Yajl::Parser.parse(p))
     end
   end
   

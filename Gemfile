@@ -2,6 +2,7 @@ source :gemcutter
 
 gem "cassandra", "~> 0.8.2"
 gem "activemodel", "~> 3.0.0"
+gem "yajl-ruby", "~> 0.7.7"
 
 group :development do
   gem "activerecord", "~> 3.0.0"
