@@ -13,8 +13,8 @@ Gem::Specification.new do |s|
   ## If your rubyforge_project name is different, then edit it and comment out
   ## the sub! line in the Rakefile
   s.name              = 'audit'
-  s.version           = '0.0.1'
-  s.date              = '2010-08-31'
+  s.version           = '0.1.0'
+  s.date              = '2010-09-29'
   s.rubyforge_project = 'audit'
 
   ## Make sure your summary is short. The description may be as long
@@ -57,6 +57,7 @@ Gem::Specification.new do |s|
     LICENSE
     README.md
     Rakefile
+    audit.gemspec
     examples/active_model.rb
     examples/active_record.rb
     examples/auditer.rb
