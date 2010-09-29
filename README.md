@@ -30,13 +30,13 @@ For Cassandra 0.7, you can set up the schema with `cassandra-cli` like so:
     use Audit
 
     /* Create new column families */
-    create column family Audits with column_type = 'Standard' and comparator = 'UTF8Type' and rows_cached = 10000
+    create column family Audits with column_type = 'Standard' and comparator = 'TimeUUIDType' and rows_cached = 10000
 
 For Cassandra 0.6, add the following to `storage-conf.xml`:
 
     <Keyspace Name="Audit">
         <KeysCachedFraction>0.01</KeysCachedFraction>
-        <ColumnFamily CompareWith="UTF8Type" Name="Audits" />
+        <ColumnFamily CompareWith="TimeUUIDType" Name="Audits" />
         <ReplicaPlacementStrategy>org.apache.cassandra.locator.RackUnawareStrategy</ReplicaPlacementStrategy>
         <ReplicationFactor>1</ReplicationFactor>
         <EndPointSnitch>org.apache.cassandra.locator.EndPointSnitch</EndPointSnitch>
