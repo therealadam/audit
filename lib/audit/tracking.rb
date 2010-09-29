@@ -30,6 +30,7 @@ module Audit::Tracking
   def audit
     data = {"changes" => changes, "metadata" => audit_metadata}
     Audit::Tracking.log.record(audit_bucket, self.id, data)
+    @audit_metadata = {}
   end
   
   # Generates the bucket name for the model class.

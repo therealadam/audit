@@ -37,8 +37,12 @@ class TrackingTest < Test::Unit::TestCase
     changes = user.audits
     
     assert_equal audit_metadata, changes.first.metadata
+
+    user.save!
+
+    assert_equal({}, user.audit_metadata) # Should clear audit after write
   end
-  
+
   should "add audit-related methods" do
     assert_equal %w{audit audit_bucket audit_metadata audits}, 
       @model.methods.map { |s| s.to_s }.grep(/audit/).sort
