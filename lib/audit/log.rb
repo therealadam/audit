@@ -19,7 +19,7 @@ module Audit::Log
   # Returns nothing.
   def self.record(bucket, key, changes)
     json = Yajl::Encoder.encode(changes)
-    payload = {SimpleUUID::UUID.new.to_guid => json}
+    payload = {SimpleUUID::UUID.new => json}
     connection.insert(:Audits, "#{bucket}:#{key}", payload)
   end
   
@@ -31,13 +31,15 @@ module Audit::Log
   #
   # Returns an Array of Changeset objects
   def self.audits(bucket, key)
+    # TODO: figure out how to do pagination here
     payload = connection.get(:Audits, "#{bucket}:#{key}", :reversed => true)
     payload.values.map do |p|
       Audit::Changeset.from_enumerable(Yajl::Parser.parse(p))
     end
   end
   
-  # Clear all audit data. Note that this doesn't yet operate on logical 
+  # Clear all audit data. 
+  # Note that this doesn't yet operate on logical 
   # buckets. _All_ of the audit data is destroyed. Proceed with caution.
   #
   # Returns nothing.
