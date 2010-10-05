@@ -28,8 +28,8 @@ module Audit::Tracking
   #
   # Returns nothing.
   def audit
-    if @skip_audit
-      @skip_audit = false
+    if skip_audit?
+      clear_skip
       return
     end
 
@@ -54,12 +54,25 @@ module Audit::Tracking
     @audit_metadata = @audit_metadata.try(:update, metadata) || metadata
   end
 
-  # Public: skip writing audit meatadata for the next write.
+  # Public: Skip writing audit meatadata for the next write.
   #
-  # Returns: nothing
+  # Returns: nothing.
   def skip_audit
-    @skip_audit = true
-    nil
+    @skip = true
+  end
+
+  # Public: Write audit metadata for the next write.
+  #
+  # Returns: nothing.
+  def clear_skip
+    @skip = false
+  end
+
+  # Public: Flag indicating whether metadata is logged on the next write.
+  #
+  # Returns: nothing.
+  def skip_audit?
+    @skip ||= false
   end
   
 end

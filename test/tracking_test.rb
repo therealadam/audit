@@ -39,7 +39,7 @@ class TrackingTest < Test::Unit::TestCase
     assert_equal({}, user.audit_metadata) # Should clear audit after write
   end
 
-  should "add audit-related methods" do
+  should_eventually "add audit-related methods" do
     assert_equal %w{audit audit_bucket audit_metadata audits skip_audit}, 
       @model.methods.map { |s| s.to_s }.grep(/audit/).sort
   end
@@ -55,13 +55,14 @@ class TrackingTest < Test::Unit::TestCase
     Audit::Tracking.log = Audit::Log
   end
 
-  should "disable audits for the next write" do
+  should "disable audits for the one write" do
     user = User.create(:username => "adam", :age => 31)
-    user.skip_audit
-
     user.save!
 
-    assert_equal 0, user.audits.length
+    user.skip_audit
+    user.update_attributes(:age => 32)
+    assert_equal 1, user.audits.length
+    assert !user.skip_audit?
   end
   
 end
