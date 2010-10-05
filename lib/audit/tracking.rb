@@ -28,6 +28,11 @@ module Audit::Tracking
   #
   # Returns nothing.
   def audit
+    if @skip_audit
+      @skip_audit = false
+      return
+    end
+
     data = {"changes" => changes, "metadata" => audit_metadata}
     Audit::Tracking.log.record(audit_bucket, self.id, data)
     @audit_metadata = {}
@@ -47,6 +52,14 @@ module Audit::Tracking
   # Returns nothing.
   def audit_metadata(metadata={})
     @audit_metadata = @audit_metadata.try(:update, metadata) || metadata
+  end
+
+  # Public: skip writing audit meatadata for the next write.
+  #
+  # Returns: nothing
+  def skip_audit
+    @skip_audit = true
+    nil
   end
   
 end

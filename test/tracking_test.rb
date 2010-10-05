@@ -20,13 +20,9 @@ class TrackingTest < Test::Unit::TestCase
     super
     @model = User.new
   end
-  
-  context "generate an audit bucket name" do
-    
-    should "based on the model name" do
-      assert_equal :Users, @model.audit_bucket
-    end
-    
+
+  should "generate an audit bucket name based on the model name" do
+    assert_equal :Users, @model.audit_bucket
   end
   
   should "track audit metadata for the next save" do
@@ -44,7 +40,7 @@ class TrackingTest < Test::Unit::TestCase
   end
 
   should "add audit-related methods" do
-    assert_equal %w{audit audit_bucket audit_metadata audits}, 
+    assert_equal %w{audit audit_bucket audit_metadata audits skip_audit}, 
       @model.methods.map { |s| s.to_s }.grep(/audit/).sort
   end
 
@@ -57,6 +53,15 @@ class TrackingTest < Test::Unit::TestCase
     User.create(:username => "Adam", :age => "31").audits
 
     Audit::Tracking.log = Audit::Log
+  end
+
+  should "disable audits for the next write" do
+    user = User.create(:username => "adam", :age => 31)
+    user.skip_audit
+
+    user.save!
+
+    assert_equal 0, user.audits.length
   end
   
 end
