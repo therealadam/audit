@@ -2,7 +2,7 @@
 <Keyspaces>
   <Keyspace Name="Audit">
       <KeysCachedFraction>0.01</KeysCachedFraction>
-      <ColumnFamily CompareWith="UTF8Type" Name="Audits" />
+      <ColumnFamily CompareWith="TimeUUIDType" Name="Audits" />
       <ReplicaPlacementStrategy>org.apache.cassandra.locator.RackUnawareStrategy</ReplicaPlacementStrategy>
       <ReplicationFactor>1</ReplicationFactor>
       <EndPointSnitch>org.apache.cassandra.locator.EndPointSnitch</EndPointSnitch>

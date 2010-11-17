@@ -34,7 +34,7 @@ module Audit::Tracking
     end
 
     data = {"changes" => changes, "metadata" => audit_metadata}
-    Audit::Tracking.log.record(audit_bucket, self.id, data)
+    Audit::Tracking.log.record(audit_bucket, self.id, Time.now.utc, data)
     @audit_metadata = {}
   end
   
