@@ -20,7 +20,7 @@ module Audit::Log
   # Returns nothing.
   def self.record(bucket, key, timestamp, changes)
     json = Yajl::Encoder.encode(changes)
-    payload = {SimpleUUID::UUID.new(timestamp) => json}
+    payload = {timestamp => json}
     connection.insert(:Audits, "#{bucket}:#{key}", payload)
   end
   

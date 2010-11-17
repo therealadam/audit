@@ -7,6 +7,12 @@ class LogTest < Test::Unit::TestCase
       Audit::Log.record(:Users, 1, timestamp, simple_change)
     end
   end
+
+  should "save audit records idempotently" do
+    t = Time.now.utc.iso8601
+    3.times { Audit::Log.record(:Users, 1, t, simple_change) }
+    assert_equal 1, Audit::Log.audits(:Users, 1).length
+  end
   
   should "load audit records" do
     Audit::Log.record(:Users, 1, timestamp, simple_change)
@@ -23,8 +29,13 @@ class LogTest < Test::Unit::TestCase
     end
   end
 
+  def teardown
+    # FIXME: figure out how to properly clear a keyspace or CF
+    Audit::Log.connection.remove(:Audits, "Users:1")
+  end
+
   def timestamp
-    Time.now.utc
+    Time.now.utc.iso8601
   end
   
   def simple_change
