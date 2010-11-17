@@ -45,3 +45,6 @@ DEPENDENCIES
   shoulda (~> 2.11.3)
   sqlite3-ruby
   yajl-ruby (~> 0.7.7)
+
+METADATA
+  version: 1.0.6
