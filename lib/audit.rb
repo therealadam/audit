@@ -3,7 +3,7 @@
 module Audit
   
   # Everything needs a version.
-  VERSION = '0.3.0'
+  VERSION = '0.4.0'
   
   autoload :Log, "audit/log"
   autoload :Changeset, "audit/changeset"
