@@ -14,10 +14,15 @@ class Test::Unit::TestCase
 
   alias_method :original_setup, :setup
   def setup
-    Audit::Log.connection = Cassandra::Mock.new(
-      'Audit', 
-      File.join(File.dirname(__FILE__), 'storage-conf.xml')
-    )
+    if ENV["CASSANDRA"] == "Y"
+      Audit::Log.connection = Cassandra.new("Audit")
+      Audit::Log.connection.clear_keyspace!
+    else
+      Audit::Log.connection = Cassandra::Mock.new(
+        'Audit', 
+        File.join(File.dirname(__FILE__), 'storage-conf.xml')
+      )
+    end
     original_setup
   end
   
