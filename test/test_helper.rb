@@ -10,6 +10,10 @@ require 'cassandra/mock'
 require 'active_record'
 require 'audit'
 
+if ENV["CASSANDRA"] == "Y"
+  puts "-- RUNNING TESTS AGAINST CASSANDRA --"
+end
+
 class Test::Unit::TestCase
 
   alias_method :original_setup, :setup
