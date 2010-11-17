@@ -45,14 +45,6 @@ task :compat do
   sh "rvm 1.9.2@audit,ree-1.8.7-2010.01@audit rake test"
 end
 
-desc "Generate RCov test coverage and open in your browser"
-task :coverage do
-  require 'rcov'
-  sh "rm -fr coverage"
-  sh "rcov test/test_*.rb"
-  sh "open coverage/index.html"
-end
-
 require 'rake/rdoctask'
 Rake::RDocTask.new do |rdoc|
   rdoc.rdoc_dir = 'rdoc'
@@ -61,15 +53,7 @@ Rake::RDocTask.new do |rdoc|
   rdoc.rdoc_files.include('lib/**/*.rb')
 end
 
-desc "Open an irb session preloaded with this library"
-task :console do
-  sh "irb -rubygems -r ./lib/#{name}.rb"
-end
-
-# =============
-# = Packaging =
-# =============
-
+desc "Build, tag, push and publish a new release."
 task :release => :build do
   unless `git branch` =~ /^\* master$/
     puts "You must be on the master branch to release!"
@@ -82,12 +66,14 @@ task :release => :build do
   sh "gem push pkg/#{name}-#{version}.gem"
 end
 
+desc "Build a new gem"
 task :build => :gemspec do
   sh "mkdir -p pkg"
   sh "gem build #{gemspec_file}"
   sh "mv #{gem_file} pkg"
 end
 
+desc "Update the generated gemspec"
 task :gemspec => :validate do
   # read spec file and split out manifest section
   spec = File.read(gemspec_file)
