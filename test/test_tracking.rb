@@ -1,4 +1,4 @@
-require "test_helper"
+require "helper"
 
 ActiveRecord::Base.establish_connection(
   :adapter => 'sqlite3',
