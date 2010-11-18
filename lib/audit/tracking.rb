@@ -34,7 +34,8 @@ module Audit::Tracking
     end
 
     data = {"changes" => changes, "metadata" => audit_metadata}
-    Audit::Tracking.log.record(audit_bucket, self.id, Time.now.utc.iso8601, data)
+    timestamp = Time.now.utc.iso8601(3)
+    Audit::Tracking.log.record(audit_bucket, self.id, timestamp, data)
     @audit_metadata = {}
   end
   
@@ -75,4 +76,29 @@ module Audit::Tracking
     @skip ||= false
   end
   
+  # Public: Restore the model's attributes to the state recorded by
+  # a changeset.
+  #
+  # changeset - the changes to undo
+  # 
+  # Returns nothing.
+  def revert_to(changeset)
+    changeset.changes.each do |change|
+      write_attribute(change.attribute, change.old_value)
+    end
+    nil
+  end
+
+  # Public: Restore a model's attributes by reversing a series of changesets.
+  #
+  # changesets - the changesets to undo
+  #
+  # Returns nothing.
+  def revert(changesets)
+    changesets.each do |changeset|
+      revert_to(changeset)
+    end
+    nil
+  end
+
 end
