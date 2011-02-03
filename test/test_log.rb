@@ -29,11 +29,6 @@ class LogTest < Test::Unit::TestCase
     end
   end
 
-  def teardown
-    # FIXME: figure out how to properly clear a keyspace or CF
-    Audit::Log.connection.remove(:Audits, "Users:1")
-  end
-
   def timestamp
     Time.now.utc.iso8601
   end

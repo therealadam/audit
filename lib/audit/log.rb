@@ -1,4 +1,4 @@
-require 'cassandra'
+require 'cassandra/0.7'
 require 'active_support/core_ext/module'
 require 'simple_uuid'
 require 'yajl'

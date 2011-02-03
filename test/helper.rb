@@ -5,7 +5,7 @@ Bundler.setup
 require 'test/unit'
 require 'shoulda'
 require 'flexmock/test_unit'
-require 'cassandra'
+require 'cassandra/0.7'
 require 'cassandra/mock'
 require 'active_record'
 require 'audit'
