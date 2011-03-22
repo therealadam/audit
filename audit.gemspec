@@ -13,8 +13,8 @@ Gem::Specification.new do |s|
   ## If your rubyforge_project name is different, then edit it and comment out
   ## the sub! line in the Rakefile
   s.name              = 'audit'
-  s.version           = '0.5.0'
-  s.date              = '2010-11-17'
+  s.version           = '0.6.0'
+  s.date              = '2011-03-22'
   s.rubyforge_project = 'audit'
 
   ## Make sure your summary is short. The description may be as long
@@ -53,7 +53,6 @@ Gem::Specification.new do |s|
   # = MANIFEST =
   s.files = %w[
     Gemfile
-    Gemfile.lock
     LICENSE
     README.md
     Rakefile
@@ -66,11 +65,11 @@ Gem::Specification.new do |s|
     lib/audit/changeset.rb
     lib/audit/log.rb
     lib/audit/tracking.rb
-    test/changeset_test.rb
-    test/log_test.rb
+    test/helper.rb
     test/storage-conf.xml
-    test/test_helper.rb
-    test/tracking_test.rb
+    test/test_changeset.rb
+    test/test_log.rb
+    test/test_tracking.rb
   ]
   # = MANIFEST =
 
