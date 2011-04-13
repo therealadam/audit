@@ -1,6 +1,6 @@
 source :gemcutter
 
-gem "cassandra", "~> 0.9.0"
+gem "cassandra", "~> 0.9.1"
 gem "activemodel", "~> 3.0.0"
 gem "yajl-ruby", "~> 0.7.7"
 
