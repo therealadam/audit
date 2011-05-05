@@ -1,1 +1,1 @@
-rvm use ree-1.8.7-2010.01@audit
+rvm use ree-1.8.7-2011.03@audit --create
