@@ -1,12 +1,11 @@
 source :gemcutter
 
-gem "cassandra", "~> 0.9.1"
-gem "activemodel", "~> 3.0.0"
-gem "yajl-ruby", "~> 0.7.7"
+gemspec
 
 group :development do
   gem "activerecord", "~> 3.0.0"
   gem "sqlite3-ruby"
+  gem "activemodel", "~> 3.0.0"
 end
 
 group :test do

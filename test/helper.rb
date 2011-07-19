@@ -22,10 +22,12 @@ class Test::Unit::TestCase
       Audit::Log.connection = Cassandra.new("Audit")
       Audit::Log.connection.clear_keyspace!
     else
-      Audit::Log.connection = Cassandra::Mock.new(
-        'Audit', 
-        File.join(File.dirname(__FILE__), 'storage-conf.xml')
-      )
+      schema = {
+        'Audit' => {
+          'Audits' => {}
+        }
+      }
+      Audit::Log.connection = Cassandra::Mock.new('Audit', schema)
     end
     original_setup
   end
