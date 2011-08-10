@@ -14,7 +14,7 @@ Gem::Specification.new do |s|
   ## the sub! line in the Rakefile
   s.name              = 'audit'
   s.version           = '0.7.1'
-  s.date              = '2011-07-19'
+  s.date              = '2011-08-10'
   s.rubyforge_project = 'audit'
 
   ## Make sure your summary is short. The description may be as long
@@ -67,6 +67,7 @@ Gem::Specification.new do |s|
     lib/audit/changeset.rb
     lib/audit/log.rb
     lib/audit/tracking.rb
+    test/ci-build
     test/helper.rb
     test/storage-conf.xml
     test/test_changeset.rb
