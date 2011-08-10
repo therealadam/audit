@@ -42,6 +42,7 @@ Gem::Specification.new do |s|
   ## that are needed for an end user to actually USE your code.
   s.add_dependency('cassandra', ["~> 0.11.0"])
   s.add_dependency('yajl-ruby', ['~> 0.7.7'])
+  s.add_dependency('thrift', ['~> 0.5.0'])
 
   ## List your development dependencies here. Development dependencies are
   ## those that are only needed during development
